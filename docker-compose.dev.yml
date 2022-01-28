@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  redis:
+  redis-dev:
     image: redis
     container_name: redis-cache
     ports:
@@ -17,14 +17,17 @@ services:
       context: .
       dockerfile: Dockerfile
       target: base
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis-dev
     links:
-      - redis
+      - redis-dev
     volumes:
       - ./src:/home/node/app/src
       - ./nodemon.json:/home/node/app/nodemon.json
     container_name: server-docker
     depends_on:
-      - redis
+      - redis-dev
     expose:
       - '4000'
     ports:

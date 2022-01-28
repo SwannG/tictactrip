@@ -1,12 +1,5 @@
 import justifyText from '../../common/justify';
-import {
-    shortText,
-    shortTextJustified,
-    mediumText,
-    mediumTextJustified,
-    longText,
-    longTextJustified,
-} from './texts';
+import { shortText, shortTextJustified, mediumText, mediumTextJustified, longText, longTextJustified } from './texts';
 
 describe( 'Justify text', () => {
     it( 'should justify short text', () => {

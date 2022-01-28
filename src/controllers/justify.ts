@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import justifyText from '../common/justify';
-import redisClient from '../index';
+import redisClient from  '../index';
 
 export const postJustify = async( req: Request, res: Response ) => {
     const justifiedText = justifyText( req.body );

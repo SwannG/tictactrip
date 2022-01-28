@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  redis-test:
+    image: redis
+    container_name: redis-cache-test
+    ports:
+      - "6379:6379"
+    expose:
+      - 6379
+    restart:
+      always
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    environment:
+      - NODE_ENV=test
+      - REDIS_HOST=redis-test
+    links:
+      - redis
+    volumes:
+      - ./src:/home/node/app/src
+      - ./nodemon.json:/home/node/app/nodemon.json
+    container_name: server-docker-test
+    depends_on:
+      - redis
+    expose:
+      - '4000'
+    ports:
+      - '4000:4000'
+    command: npm run test

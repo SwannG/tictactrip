@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import redisClient from '../index';
+import redisClient from  '../index';
 const { isAuthenticated } = require( '../common/authUtils' );
 
 module.exports = {
