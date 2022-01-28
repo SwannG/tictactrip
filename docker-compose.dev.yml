@@ -4,6 +4,8 @@ services:
   redis-dev:
     image: redis
     container_name: redis-dev
+    volumes:
+      - redis_data:/data
     ports:
       - "6379:6379"
     expose:
@@ -35,3 +37,5 @@ services:
     ports:
       - '4000:4000'
     command: npm run dev
+volumes:
+  redis_data:

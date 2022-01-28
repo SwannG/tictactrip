@@ -4,6 +4,8 @@ services:
   redis-prod:
     image: redis
     container_name: redis-prod
+    volumes:
+      - redis_data:/data
     ports:
       - "6380:6380"
     expose:
@@ -34,3 +36,5 @@ services:
     ports:
       - '4001:4001'
     command: node build/index.js
+volumes:
+  redis_data:
