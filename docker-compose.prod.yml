@@ -1,7 +1,36 @@
 version: '3.7'
 
 services:
-  server:
+  redis-prod:
+    image: redis
+    container_name: redis-prod
+    ports:
+      - "6380:6380"
+    expose:
+      - 6380
+    command: --port 6380 --save 1 1 --loglevel warning
+    restart:
+      always
+
+  server-prod:
     build:
+      context: .
+      dockerfile: Dockerfile
       target: production
+    environment:
+      - NODE_ENV=production
+      - SERVER_PORT=4001
+      - REDIS_HOST=redis-prod
+      - REDIS_PORT=6380
+    links:
+      - redis-prod
+    volumes:
+      - ./src:/home/node/app/src
+    container_name: server-prod
+    depends_on:
+      - redis-prod
+    expose:
+      - '4001'
+    ports:
+      - '4001:4001'
     command: node build/index.js

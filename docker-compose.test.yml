@@ -3,32 +3,35 @@ version: '3.7'
 services:
   redis-test:
     image: redis
-    container_name: redis-cache-test
+    container_name: redis-test
     ports:
-      - "6379:6379"
+      - "6381:6381"
     expose:
-      - 6379
+      - 6381
+    command: --port 6381
     restart:
       always
 
-  server:
+  server-test:
     build:
       context: .
       dockerfile: Dockerfile
       target: base
     environment:
       - NODE_ENV=test
+      - SERVER_PORT=4002
       - REDIS_HOST=redis-test
+      - REDIS_PORT=6381
     links:
-      - redis
+      - redis-test
     volumes:
       - ./src:/home/node/app/src
       - ./nodemon.json:/home/node/app/nodemon.json
-    container_name: server-docker-test
+    container_name: server-test
     depends_on:
-      - redis
+      - redis-test
     expose:
-      - '4000'
+      - '4002'
     ports:
-      - '4000:4000'
+      - '4002:4002'
     command: npm run test

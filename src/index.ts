@@ -1,6 +1,5 @@
 import { RedisClientType } from './common/types';
 const bodyParser = require( 'body-parser' );
-const config =  require( '../config' );
 const express = require( 'express' );
 const redis = require( 'redis' );
 
@@ -8,7 +7,7 @@ const app = express();
 
 console.log( `NODE_ENV=${process.env.NODE_ENV}` );
 
-const redisClient: RedisClientType = redis.createClient( { socket: { host: process.env.REDIS_HOST } } );
+const redisClient: RedisClientType = redis.createClient( { socket: { host: process.env.REDIS_HOST, port: process.env.REDIS_PORT } } );
 
 redisClient.connect();
 
@@ -30,8 +29,8 @@ app.use( bodyParser.urlencoded( { extended:true } ) );
 app.use( '/', require( './routes' ) );
 
 if ( process.env.NODE_ENV !== 'test' ) {
-    app.listen( 4000, () => {
-        console.log( 'server running on port 4000' );
+    app.listen( process.env.SERVER_PORT, () => {
+        console.log( `server running on port ${process.env.SERVER_PORT}` );
     } );
 } else {
     module.exports = {
