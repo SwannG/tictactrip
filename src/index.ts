@@ -15,8 +15,6 @@ redisClient.on('error', (err: any) => {
 
 redisClient.on('connect', async () => {
     console.log('Connected to Redis');
-    await redisClient.set('KEY', 'VALUE')
-    console.log("DEBUG", await redisClient.get('KEY'))
 })
 
 app.use(bodyParser.json());
