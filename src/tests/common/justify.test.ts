@@ -3,14 +3,14 @@ import { shortText, shortTextJustified, mediumText, mediumTextJustified, longTex
 
 describe( 'Justify text', () => {
     it( 'should justify short text', () => {
-        expect( justifyText( shortText ) ).toEqual( shortTextJustified );
+        expect( justifyText( shortText ) ).toBe( shortTextJustified );
     } );
 
     it( 'should justify medium text', () => {
-        expect( justifyText( mediumText ) ).toEqual( mediumTextJustified );
+        expect( justifyText( mediumText ) ).toBe( mediumTextJustified );
     } );
 
     it( 'should justify long Text', () => {
-        expect( justifyText( longText ) ).toEqual( longTextJustified );
+        expect( justifyText( longText ) ).toBe( longTextJustified );
     } );
 } );

@@ -7,11 +7,12 @@ const app = express();
 
 console.log( `NODE_ENV=${process.env.NODE_ENV}` );
 
-const redisClient: RedisClientType = redis.createClient( { socket: { host: process.env.REDIS_HOST, port: process.env.REDIS_PORT } } );
+const redisClient: RedisClientType = redis.createClient(
+    { socket: { host: process.env.REDIS_HOST, port: process.env.REDIS_PORT } } );
 
 redisClient.connect();
 
-redisClient.on( 'error', ( err: any ) => {
+redisClient.on( 'error', ( err: Error ) => {
     console.log( 'Error ' + err );
 } );
 
