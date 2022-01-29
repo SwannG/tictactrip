@@ -23,6 +23,8 @@ build-prod:
 	docker-compose -f docker-compose.prod.yml build
 up-prod:
 	docker-compose -f docker-compose.prod.yml up
+up-prod-silent:
+	docker-compose -f docker-compose.prod.yml up -d
 up-prod-orphans:
 	docker-compose -f docker-compose.prod.yml up --remove-orphans
 down-prod:
