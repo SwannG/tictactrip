@@ -1,4 +1,4 @@
-# tictactrip-assignment
+# Tictactrip Assignment
 
 ### Required
 - Docker
