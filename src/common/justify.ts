@@ -18,7 +18,7 @@ const justifyText = ( text: string ): string => {
     return result;
 };
 
-const init = ( text: string[] ) => {
+const init = ( text: string[] ) => { 
     dp = [];
     lastWordsLineIndexes = [];
     for ( let i = 0; i < text.length; ++i ) {
@@ -27,22 +27,22 @@ const init = ( text: string[] ) => {
 };
 
 const costFunction = ( text: string[], i: number, j: number ) => {
-    let nbChar: number = -1;
+    let length: number = -1;
 
-    while ( i <= j && nbChar <= lineLimit ) {
-        nbChar = nbChar + text[ i ].length + 1;
+    while ( i <= j ) {
+        length += text[ i ].length + 1;
         ++i;
     }
 
-    if ( nbChar > lineLimit ) {
+    if ( length > lineLimit ) {
         return infinite;
     }
-    else if ( nbChar < lineLimit && j === text.length - 1 ) {
+
+    if ( j === text.length - 1 ) {
         return 0;
     }
-    else {
-        return Math.pow( lineLimit - nbChar, 3 );
-    }
+
+    return Math.pow( lineLimit - length, 3 );
 };
 
 const getDP = ( text: string[], i: number ) => {
